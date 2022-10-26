@@ -14,9 +14,9 @@ public class Program
 
 		while(loop)
 		{
-			CoinFlipper(); // models the ENTRIE behavior
+			CoinFlipper(); // models the ENTIRE behavior
 
-			Console.WriteLine("Would you like to flips more coins?\nEnter 'Y' to continue or anything else to quit");
+			Console.WriteLine("Would you like to flips more coins?\nEnter number of coins ");
 			string playAgain = Console.ReadLine().ToUpper();
 
 			if (playAgain.Equals("Y"))
@@ -33,11 +33,11 @@ public class Program
 
 	public static void CoinFlipper()
 	{
-		Console.WriteLine("Starting Coin Flipper:");
+		Console.WriteLine("I have a coin here. Let's play a game!");
 		
-		Console.WriteLine("Enter the number of coins to flip: ");
+		Console.WriteLine("Heads or tails? Type your response below:");
 		
-		string UserNumber = Console.ReadLine();
+		string response = Console.ReadLine();
 		int Num = 0;
 		
 		try
@@ -60,31 +60,54 @@ public class Program
 		{
 			Console.WriteLine("The least specific catch: " + e.Message);
 		}
-		
-		Flip(Num);
+	
+			///////////////////// REMEMBER TO CALL FLIPCOIN //////////////////////////////
+
 	}
 	
-	//[access modifier] [modifier] [return type] [method name] ([parameters])
-	public static void Flip(int Num)
+	
+	public static void FlipCoin(int Num)
 	{
 		var rand = new Random();
-		
-		for (int i = 0; i < Num; i++)
+		int coin = rand.Next(102);
+		int result;
+
+		if (coin == 100)
 		{
-			int coin = rand.Next(2);
-			HoT(coin);
+			result = 4;
 		}
-	}
-	
-	public static void HoT(int coin)
-	{
-		if (coin == 0)
+		else if (coin == 101)
 		{
-			Console.WriteLine("Heads");	
+			result = 3;
+		}
+		else if ( coin % 2 == 0)
+		{
+			result = 2;
 		}
 		else
 		{
-			Console.WriteLine("Tails");
+			result = 1;
+		}
+
+		CallResults(result);
+	}
+	
+	public static void CallResults(int result)
+	{
+		switch (result)
+		{
+			case 4:
+				Console.WriteLine("Wow, it landed on its side. Guess it's a draw.");
+				break;
+			case 3:
+				Console.WriteLine("Um, I don't think it's coming down. Huh. One sec.");
+				break;
+			case 2:
+				Console.WriteLine("It's heads.");
+				break;
+			case 1:
+				Console.WriteLine("It's tails.");
+				break;
 		}
 	}
 }
