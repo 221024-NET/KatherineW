@@ -16,7 +16,7 @@ public class Program
 		{
 			CoinFlipper(); // models the ENTIRE behavior
 
-			Console.WriteLine("Would you like to flips more coins?\nEnter number of coins ");
+			Console.WriteLine("Would you like to flips more coins?\nEnter number of coins or type 'X' to quit:");
 			string playAgain = Console.ReadLine().ToUpper();
 
 			if (playAgain.Equals("Y"))
@@ -33,40 +33,32 @@ public class Program
 
 	public static void CoinFlipper()
 	{
-		Console.WriteLine("I have a coin here. Let's play a game!");
+		string playerChoice = "";
+		string response = "";
+
+		Console.WriteLine("I have a coin here. Let's play a game!\nHeads or tails? Type your response below:");
+		response = Console.ReadLine();
 		
-		Console.WriteLine("Heads or tails? Type your response below:");
-		
-		string response = Console.ReadLine();
-		int Num = 0;
-		
-		try
+		if (response.ToLower() == "heads" || response.ToLower() == "h")
 		{
-			Num = Int32.Parse(UserNumber);
-			if ( Num <= 0 )
-			{
-				throw new Exception("Argument may not be negative");
-			}
+			playerChoice = "heads";
 		}
-		catch( InvalidOperationException e )
+		else if (response.ToLower() == "tails" || response.ToLower() == "t")
 		{
-			Console.WriteLine("A less specific catch: " + e.Message);
+			playerChoice = "tails";
 		}
-		catch( ArgumentException e)
+		else
 		{
-			Console.WriteLine(e.Message);
-		}
-		catch( Exception e )
-		{
-			Console.WriteLine("The least specific catch: " + e.Message);
+			Console.WriteLine("Please enter a valid response ('heads'/'h' or 'tails'/'t'):");	
+			response = Console.ReadLine();
 		}
 	
-			///////////////////// REMEMBER TO CALL FLIPCOIN //////////////////////////////
+			FlipCoin(playerChoice);
 
 	}
 	
 	
-	public static void FlipCoin(int Num)
+	public static void FlipCoin(string playerChoice)
 	{
 		var rand = new Random();
 		int coin = rand.Next(102);
