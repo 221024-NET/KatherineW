@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace FileIO
 {
@@ -7,21 +8,61 @@ namespace FileIO
     {
         public static void Main()
         {
-            Console.WriteLine("Hello, World!");
+            string[] prompts = File.ReadAllLines("./questions.txt");
+            StringBuilder userAnswers = new StringBuilder();
+            User user = new User();
 
-            string path = "./testFile.txt";
-
-            string[] text = {"hi", "hello", "there", "hows", "it", "going?"};
-
-            //File.WriteAllLines(path, text);
-            //File.AppendAllLines(path, text);
-
-            string[] content = File.ReadAllLines(path);
-
-            foreach (string s in content)
+            Console.WriteLine("Do you exist?");
+            if (Console.ReadLine() == "yes")
             {
-                Console.WriteLine(s);
+                if (File.ReadAllLines(user.userPath) != null)
+                {
+                    user.GetUser();
+                }
+                else
+                {
+                    Console.WriteLine("No you don't");
+                }
+            }
+            else
+            {
+                for (int i = 0; i < prompts.Length; i++)
+                {
+
+                    Console.WriteLine(prompts[i]);
+                    string answer = Console.ReadLine();
+                    if (i == (prompts.Length - 1))
+                    {
+                        userAnswers.Append(answer);
+                    }
+                    else
+                    {
+                        userAnswers.Append(answer + ", ");
+                    }
+                }
+                user.SaveUser(userAnswers.ToString());
             }
         }
     }
 }
+/*
+            string[] prompts = File.ReadAllLines("./questions.txt");
+            string[] userAnswers = new string[prompts.Length];
+            User user = new User();
+
+            for (int i = 0; i < prompts.Length; i++)
+            {
+
+                Console.WriteLine(prompts[i]);
+                string answer = Console.ReadLine();
+                if (i == (prompts.Length - 1))
+                {
+                    userAnswers[i] = answer;
+                }
+                else
+                {
+                    userAnswers[i] = (answer + ", ");
+                }
+            }
+            user.SaveUser(userAnswers);
+*/
