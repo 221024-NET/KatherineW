@@ -35,7 +35,8 @@ Join Invoice On Customer.CustomerId = Invoice.CustomerId;
 
 Select Playlist.Name, COUNT(PlaylistTrack.PlaylistId) as SongCount From PlaylistTrack
 	Join Playlist On Playlist.PlaylistId = PlaylistTrack.PlaylistId
-	Group By Playlist.Name Order By SongCount DESC;
+	Group By Playlist.Name
+	Order By SongCount DESC;
 
 -- Only returns playlist names and IDs of playlists with tracks
 Select Playlist.Name, Playlist.PlaylistId From Playlist
@@ -49,10 +50,13 @@ Select * From Customer
 	Group By Customer.CustomerID
 
 -- 2009 Invoice -> Customer Support ID -> Employee Name -- , COUNT(Employee.EmployeeId) As EmployeeSales
-
-Select Employee.FirstName + ' ' + Employee.LastName As Employee, COUNT(Employee.EmployeeId) As Sales From Invoice
 --Invoice.InvoiceId, Invoice.InvoiceDate, Employee.FirstName + ' ' + Employee.LastName As Employee, Employee.EmployeeId From Invoice
-	Join Customer On Invoice.CustomerId = Customer.CustomerId
-	Join Employee On Customer.SupportRepId = Employee.EmployeeId
-	Where Invoice.InvoiceDate LIKE '%2009%'
-	Group By Sales;
+
+Select Emp.FirstName + ' ' + Emp.LastName As EmpName, COUNT(Emp.EmployeeId) As Id From Invoice As I -- Employee.FirstName + ' ' + Employee.LastName, COUNT(Employee.EmployeeId) From Invoice
+	Join Customer As Cus On I.CustomerId = Cus.CustomerId
+	Join Employee As Emp On Cus.SupportRepId = Emp.EmployeeId
+	Where I.InvoiceDate LIKE '%2009%'
+	Group By Emp.FirstName, Emp.LastName, Emp.EmployeeId
+	Order By Id DESC;
+	
+-- Which sales agent made the most sales in 2009?
