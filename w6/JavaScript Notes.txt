@@ -1,0 +1,968 @@
+28-Nov-2022:
+============
+JavaScript:
+===========
+JS is an in-browser programming language.
+It can:
+- modify the web page, it's content, it's styles, it's HTML etc.
+- react to user actions, mouse clicks, pointer movements, key presses.
+- send requests over the network to remote servers, for e.g.; calling an API (using AJAX).
+- get / set cookies.
+- show messages, prompt users for answers/input.
+- remember data on the client-side (local storage).
+- can access files locally, but that requires special permissions and very limited actions.
+
+It cannot:
+- access the O/S of local/client machine.
+- access the memory of the client machine.
+- access local files arbitrariliy.
+- although can open new tabs in the browser, it cannot access other pages.
+
+Fully integrated with HTML / CSS.
+Supported by all major browsers.
+Enabled by default.
+Portable: Most JS written will work on any browser.
+
+Can be used to creat web apps, mobile apps etc.
+
+JS is NOT a compiler-based language.
+It is an interpretor. Errors will come up only on execution.
+
+Statements:
+-----------
+// Works.
+alert('Hello'); alert('there');
+// Error.
+alert('Hello') alert('there');
+// Works:
+alert('Hello')
+alert('there');
+
+The semicolon is mandatory if there are more than one statements on a single line.
+JS does not assume a semicolo exists (if not provided) before square brackets (arrays).
+Preferrably, use a semicolon after every expression/statement.
+
+Comments:
+---------
+Single line comments: 	//
+Multi-line comments:	/*   */
+
+"use strict" mode in JS:
+JS over the years has evolved a lot.
+New features have been added and old features have not changed.
+Minimal compatibility issues.
+Around 2009 ECMAScript 5 (ES5). It added new features to the JS language and also modified existing ones.
+To keep the old code working, most of these modifications are set to "off" by default.
+
+ECMA: European Computer Manufacturer's Association.
+
+To enforce usage of new features only, you have use the strict mode.
+Do this by specifying "use strict" (including the quotes) at the top of your JS code.
+"use strict";
+
+You cannot have a mix-n-match of old and new features.
+You cannot cancel "use strict"!
+
+Variables:
+----------
+Define variables using "let" keyword:
+let variable_name = value;
+let variable_name;
+
+Allowed, but don't use this syntax:
+let username = 'John', age = 25, message = 'hello';
+
+Preferred:
+let username = 'John';
+let age = 25;
+let message = 'hello';
+
+let age = 25;				// number.
+alert(10 + age);			// gives 35
+
+let age = '25';				// string.
+alert(10 + age);			// gives 1025. It concatenates.
+
+In JS you can also declare variables using "var", the old-school way of defining variables in JS.
+
+You cannot re-declare a variable:
+let username = 'John';
+alert(username);
+
+let username = 'Mary';	// re-declared. ERROR!
+alert(username);
+
+Rules for variable names:
+- name must contain only letters, digits, _ and $.
+- the first character must not be a digit.
+
+Valid:
+let name = 'John';
+let test123 = 123;
+
+let $ = 1;
+let _ = 2;
+alert( $ + _);
+
+Invalid:
+let 1abc = 10;
+let some-name = 'Mary';
+
+Case matters. JS is case-sensitive:
+let name = 'John';
+let Name = 'Mary';
+alert(name);
+alert(Name);
+
+let let = 50;
+
+Cannot use Keywords as variable names:
+let let = 50;
+let return = 'Hello';
+
+Constants:
+----------
+Variables whose values do not change. You cannot reassign values to a constant variable.
+Define constants using the "const" keyword:
+const variable_name = fixed_value;
+
+const status = 'Pending';
+alert(status);
+
+status = 'Approved';
+
+Constants are defined with UPPERCASE names:
+const COLOR_RED = '#F00';
+const COLOR_GREEN = '#0F0';
+const COLOR_BLUE = '#00F';
+const COLOR_ORANGE = '#FF7F00';
+
+You can assign constants to other variables.
+let currentColor = COLOR_ORANGE;
+
+Data Types:
+-----------
+let message = 'Hello';
+alert(message);
+message = 123456;
+alert(message);
+
+JS is not so strict when it comes to variable values. The type can be changed during runtime without errors.
+Be very careful when assigning values to variables.
+
+let n= 123;
+alert(n);
+n = 12.345;
+alert(n);
+
+Data Type: number:
+==================
+So no separate types for int, float, double etc.
+Just "number".
+
+"Infinity" is a special numerical value that is greater than any number.
+alert(1/0);		// gives Infinity.
+
+Reference it directly:
+alert(Infinity);
+
+"NaN": "Not a Number". 
+alert("this is not a number" / 2);		// NaN.
+alert(NaN + 5);							// NaN.
+alert(3 * NaN);							// NaN.
+
+Data Type: string:
+==================
+Values assigned using single or double quotes.
+let msg = 'Hello';
+let name = "John Smith";
+let msg2 = "This won't affect anything.";
+
+There is a special set of quotes known as the "back tick" that is used for "extended functionality".
+For e.g.;
+let name = 'John';
+alert(`Hello, ${name}`);
+
+The "${expression}" syntax is known as "interpolation".
+
+alert(`The result of 1 + 2 is ${1 + 2}`);
+
+There is no "character" type in JavaScript.
+'C', 'A'.
+
+Data Type: Boolean:
+===================
+Either true or false (case-sensitive).
+let isApproved = true;
+let isValid = false;
+let isGreater =  1 > 4;
+
+The "null" value: empty, no value, nothing.
+=================
+let age = null;
+alert(age);
+age = 20;
+alert(age);
+age = null;
+alert(age * 20);	// 0.
+
+The "undefined" value:
+======================
+Similar to null.
+let age = undefined;
+alert(age);
+age = 20;
+alert(age);
+age = undefined;
+alert(age * 20);	// NaN.
+let name;
+alert(name);		// Undefined.
+
+"typeof" operator:
+==================
+alert(typeof 10);
+alert(typeof "John");
+alert(typeof true);
+alert(typeof NaN);			// number.
+alert(typeof null);			// object.
+alert(typeof undefined);	// undefined.
+
+Comparisons:
+============
+alert(2 > 1);		// true
+alert( 2 != 1);		// true
+alert( 2 == 1);		// false
+alert( 2 == "2");	// true
+alert( 2 === "2");	// ??
+
+"==" only compares the values. So, 2 and "2" are equal.
+"===" compares the values as well as the data type. So, 2 and "2" are not the same.
+
+alert(null > 0);	// false. Converts null to 0. Therefore, 0 > 0 FALSE.
+alert(null == 0);	// false. Does not convert null to 0.
+alert(null >= 0);	// true. Converts null to 0. Therefore, 0 >= 0 TRUE.
+
+Equality check (==) and comparison (> < >= <=) work a bit differently.
+Comparison converts null to 0, which is why null >= 0 true and null > 0 false.
+
+Conditional branching using "if" statement:
+===========================================
+let year = prompt('In which year was the ECMAScript 2015 specification published?:');
+if(year == 2015 {
+	alert('This is correct');
+	alert('Awesome!');
+}
+
+if-else:
+--------
+let year = prompt('In which year was the ECMAScript 2015 specification published?:');
+if(year == 2015) {
+	alert('This is correct');
+	alert('Awesome!');
+} else {
+	alert('The correct year is 2015.');
+}
+
+
+Multiple if-else condtions:
+---------------------------
+let year = prompt('In which year was the ECMAScript 2015 specification published?:');
+if(year == 2015) {
+	alert('This is correct');
+} else if (year < 2015){
+	alert('Too early.');
+} else if (year > 2015){
+	alert('Too late.');
+}
+
+// Alternative:
+let year = prompt('In which year was the ECMAScript 2015 specification published?:');
+if (year < 2015){
+	alert('Too early.');
+} else if (year > 2015){
+	alert('Too late.');
+} else {
+	alert('Exactly! This is correct');
+}
+
+Conditional operator "?":
+-------------------------
+let isAdult;
+let age = promopt('How old are you?:');
+if(age > 18) {
+	isAdult = true;
+} else {
+	isAdult = false;
+}
+alert('Can you vote?: ' + isAdult);
+
+// using ?:
+let age = prompt('How old are you?:');
+//let isAdult = (age > 18) ? "Yes you can vote" : "No you cannot vote";
+//let isAdult = (age > 18) ? true : false;
+let isAdult = (age > 18);
+alert('Can you vote?: ' + isAdult);
+
+// Avoid checking true and false explicitly.
+Instead of these:
+if(isAdult == true)
+if(isAdult != true)
+if(isAdult == false)
+
+Do this:
+if(isAdult)
+if(!isAdult)
+if(!isAdult)
+
+Logical operators:
+==================
+OR: ||
+If any of the conditions are true, returns a true. Else, returns a false.
+
+cond1 || cond2
+cond1 || cond2 || cond3
+
+alert(true || true);		// true.
+alert(true || false);		// true.
+alert(false || true);		// true;
+alert(false || false);		// false;
+
+let hour = prompt('Enter a number:');
+if(hour < 10 || hour > 18) {
+	alert('Office is closed.');
+} else {
+	alert('Office is open');
+}
+
+AND: &&
+If all conditions are true, returns a true. Else, returns a false. In other words, if any of the conditions is false, the entire expression is false.
+cond1 && cond2
+cond1 && cond2 && cond3
+
+alert(true && true);		// true.
+alert(true && false);		// false.
+alert(false && true);		// false;
+alert(false && false);		// false;
+alert(true && true && true && false);	// false.
+
+The NOT operator: !
+-------------------
+!true gives false.
+!false gives true.
+
+let isValid = true;
+alert(!isValid);	// false.
+let isAdult = false;
+alert(!isAdult);	// true.
+
+alert(!0);	// true.
+alert(!1);	// false.
+alert(!2);	// false. Any non-0 number treated like "true".
+
+Loops:
+======
+while loop:
+syntax:
+while(condition) {
+	// code.
+}
+
+Does nothing!:
+let i = 0;
+while(i > 10) {
+	alert(i);
+}
+
+Infinite Loop:
+let i = 0;
+while(i < 10) {
+	alert(i);
+}
+
+Ensure that the condition is met at some point in time. Avoid infinite loops.
+let i = 0;
+while(i < 10) {
+	alert(i);
+	//i = i + 1;
+	i++;
+}
+
+let i = 10;
+while(i > 0) {
+	alert(i);
+	i--;
+	// i = i - 1;
+}
+
+do-while loop:
+--------------
+// prints 0 and stops.
+let i = 0;
+do {
+ alert(i);
+ i++;
+} while(i > 10);
+
+// // Infinite loop.
+let i = 20;
+do {
+ alert(i);
+ i++;
+} while(i > 10);
+
+// This works.
+let i = 0;
+do {
+	alert(i);
+	i++;
+} while(i < 10);
+
+while loop checks for the condition first and enters the loop only if the condition is true. So, it is possible that the code inside the loop is never execute because the condition is never met (true).
+do-while loop checks for the condition at the end of the loop. So, the code inside the do-while loop will be executed at least once irrespective of whether the condition is true or false the first time around.
+REMEMBER to provide a value that will break the condition. So, either increment or decrement or update the value being checked.
+
+The for loop:
+-------------
+syntax:
+for(init; condition; step) {
+}
+Here,
+	- init is the initialization part, executed only once.
+	- as long as the condition is true, the for loop will continue.
+	- step: is the increment or decrement operation.
+	
+for(let i = 0; i < 10; i++) {
+	alert(i);
+}
+for(let i = 10; i > 0; i--) {
+	alert(i);
+}
+
+for(init, cond1 && cond2; incr) {
+}
+
+// infinite loop.
+for(;;) {
+	alert("hello");
+	// make sure you exit the loop somehow.
+}
+
+Breaking out of a loop:
+-----------------------
+Using "break" to break out of a loop (while, do-while or for loop).
+
+let sum = 0;
+while(true) {
+	let num = prompt("Enter a number (0 to exit): ");
+	if(num == 0) {
+		break;
+	}
+	sum += num;	// sum = sum + num;
+	alert(sum);
+}
+
+Continue a loop:
+----------------
+Using "continue" to skip remaining code in the loop and going back to the start of the loop.
+for(let i = 0;i < 10; i++) {
+	if(i % 2 == 0) {
+		continue;
+	}
+	alert(i);
+}
+
+Functions:
+==========
+Syntax:
+function func_name() {
+}
+
+showMessage();
+
+function showMessage() {
+	alert("Welcome to JavaScript");
+}
+
+showMessage();
+showMessage();
+
+function func_name(param1, param2,....paramn) {
+}
+
+function showMessage(name) {
+	alert(`Hello ${name}. Welcome to JavaScript`);
+}
+
+showMessage("John");
+showMessage("Mary");
+
+Using variables properly with functions:
+----------------------------------------
+Local variables: variables declared within a function and only visible inside the function.
+
+function showMessage() {
+	let msg = "Hello, this is JavaScript.";
+	alert(msg);
+}
+
+showMessage();
+alert(msg);		// Error.
+
+Outer Variables: defined outside any function, are visible inside any function.
+let name = 'John';
+function showMessage() {
+	let msg = "Hello, this is JavaScript. Welcome " + name;
+	alert(msg);
+}
+
+showMessage();
+//alert(msg);		// Error.
+alert(name);
+
+Function Parameters: as good as a local variable. Not accessible outside the function.
+function foo(param1, param2) {
+	alert(param1);
+	alert(param2);
+}
+
+foo("Hello", "there");
+alert(param1);		// Error.
+
+Default values to function params:
+function showMessage(sender, body = "Please provide text here") {
+	alert(`Message from ${sender} says ${body}`);
+}
+
+showMessage('John', "Can't wait for the party!");
+showMessage('Mary');		// uses the default value for param "body".
+
+Return value from function:
+---------------------------
+function add(num1, num2) {
+	return num1 + num2;
+}
+alert(add(10,24));
+
+function checkAge(age) {
+	if(age > 18) {
+		return true;
+	} else {
+		return confirm("Do you have permission from your parents?")
+	}
+}
+
+let age = prompt('How old are you?:');
+if(checkAge(age)) {
+	alert('Access granted.');
+} else {
+	alert('Access denied');
+}
+
+"this" keyword:
+===============
+"this" refers to the current object that is executing the current piece of code.
+References the object that is executing the current function.
+If "this" is used outside of a function, it represents the global object.
+
+Global scope:
+<html>
+	<head>
+	
+	</head>
+	
+	<body>
+		<p>Using "this"...</p>
+		<script>
+			var num = 100;
+			
+			function printMe() {
+				var num = 200;
+				alert('num = ' + num);				// refers to the local variable. 200.
+				alert('this.num = ' + this.num);	// refers to the global variable. 100.
+			}
+			
+			printMe();
+		</script>
+		
+	</body>
+</html>
+
+If a function accesses a variable, it looks for it in the function. If found, uses it. If not, looks for it outside the function.
+<script>
+	var num = 100;
+	
+	function printMe() {
+		this.num = 200;
+		alert('num = ' + num);				// 200.
+		alert('this.num = ' + this.num);	// 200.
+	}
+	
+	printMe();
+</script>
+
+Variation: If the function that is being referenced is a method in an object, then "this" refers to the object itself.
+Object Method:
+<script>
+	var num = 100;
+	
+	function printMe() {
+		this.num = 200;
+		this.display = function() {
+			var num = 300;
+			alert('num = ' + num);				// 300.
+			alert('this.num = ' + this.num);	// 200.
+		}
+	}
+	
+	var obj = new printMe();
+	obj.display();
+	display();		// Error.
+</script>
+
+29-Nov-2012:
+============
+let vs var
+let age = 10;
+var name = 'John';
+
+let															var
+-------------------------------------------------------------------------------------------------------
+list is block-scoped.										var is function scoped.
+let does not allow redeclaration of variables.				var allows to redeclare variables.
+Hoisting does not occur in let.								Hoisting occurs in var.
+
+1. var is function scoped and let is block-scoped:
+-----------------------------------------------
+A variable declared using var inside a function can be used anywhere within the function.
+// var is function scoped.
+function greet() {
+	var msg = 'Hello';
+	console.log(msg);
+}
+greet();
+//console.log(msg);		// Error.
+
+// let is block-scoped.
+function greeting() {
+	let newMsg = 'Hello there!';
+	
+	if(newMsg == 'Hello there!') {
+		let text = 'This is JavaScript.';
+		console.log(newMsg + ' ' + text);
+	}
+
+	console.log(newMsg + ' ' + text);	// Error!
+}
+greeting();
+console.log(newMsg);	// Error!
+console.log(text);		// Error!
+
+2. let does not allow redeclaration of variables. var allows to redeclare variables:
+------------------------------------------------------------------------------------
+var a = 10;
+var a = 20;		// Works!
+
+let b = 100;
+let b = 20;		// Error!
+
+var a = 5;
+console.log(a);		// 5.
+{
+	var a = 3;
+	console.log(a);	// 3.
+}
+console.log(a);		// 3.
+
+var a = 5;
+console.log(a);		// 5.
+{
+	let a = 3;
+	console.log(a);	// 3.
+}
+console.log(a);		// 5.
+
+// using let.
+let x = 51;
+console.log(x);		// 51.
+{
+	let x = 31;
+	console.log(x);	// 31.
+}
+console.log(x);		// 51.
+
+3. Hoisting does not occur in let. Hoisting occurs in var:
+----------------------------------------------------------
+with let, you cannot use a variable before it is declared. No hoisting!
+with var, you can use the variable before it is declared. Allows hoisting.
+
+let x = 51;
+console.log(x);		// 51.
+{
+ x = 41;			// Error! Cannot access 'x' before initialization
+ let x = 31;
+ console.log(x);
+}
+console.log(x);
+
+console.log(x1);
+var x1 = 51;
+
+Always prefer to use let and not var!!!
+
+Classes in JS:
+==============
+Syntax:
+
+class ClassName {
+	constructor() { ... }
+	method1() { .... }
+	method2() { .... }
+}
+
+For e.g.;
+// Declare a class with a ctor and a method.
+class User {
+	constructor(nm) {
+		this.name = nm;
+	}
+	
+	sayHi() {
+		alert(this.name);
+	}
+}
+
+// Usage of the class.
+let user1 = new User('John');
+user1.sayHi();
+let user2 = new User('Mary');
+user2.sayHi();
+user1.sayHi();
+alert(typeof User);		// function.
+
+A class in JS is actually (internally) a function. It's a special kind of function.
+
+// Declare a class with a ctor and a method.
+class User {
+	constructor(nm) {
+		this.name = nm;
+		this.city = 'Dallas';
+	}
+	
+	sayHi() {
+		alert(this.name + ' ' + this.city);
+	}
+}
+
+User.prototype.sayHello = function() {
+	alert(`Hello there ${this.name}`); 
+}
+
+// Usage of the class.
+let user1 = new User('John');
+user1.sayHi();
+let user2 = new User('Mary');
+user2.sayHi();
+// user1.sayHi();
+// alert(typeof User);		// function.
+
+// alert(User.prototype.sayHi);				// code of sayHi().
+// alert(User.prototype.constructor);			// code of the ctor.
+// alert(User === User.prototype.constructor);	// true.
+
+user1.sayHello();
+
+You can define getters and setters for class properties:
+// Getters and Setters.
+class User {
+	constructor(nm) {
+		this.name = nm;
+		this.lastname = 'Smith';
+	}
+	
+	// getter.
+	get name() {
+		return this._name;
+	}
+	
+	// setter.
+	set name(value) {
+		if(value.length < 4) {
+			alert(`"${value}" Name is too short. Must be atlest 4 characters.`);
+			return;
+		}
+		this._name = value;
+	}
+	
+	// Readonly property.
+	get fullname() {
+		return `${this.lastname}, ${this._name}`;
+	}
+}
+
+// let user1 = new User('John');
+// alert(user1.name);
+// user1.name = 'Johnathan'
+// alert(user1.name);
+let user1 = new User('John');
+alert(user1.name);
+let user2 = new User('Joe');	// Error.
+alert(user2.name);			// undefined.
+user1.name = 'May';			// Error.
+alert(user1.name);			// John.
+
+alert(user1.fullname);		// Smith, John.
+user1.fullname = 'Joe Pricey';
+alert(user1.fullname);		// Smith, John.
+
+Class fields:
+-------------
+Class fields are set on individual objects and not on ClassName.prototype.
+You cannot access them via the prototype object of the class.
+Access them directly from the class instance (object).
+
+// Class fields:
+class User {
+	name = 'John';	// class field. or property.
+	
+	constructor(ct) {
+		this.city = ct;
+	}
+	
+	sayHi() {
+		alert(`Hello ${this.name}`);
+	}
+}
+
+let user1 = new User();
+user1.sayHi();
+alert(user1.name);				// John.
+alert(User.prototype.name);		// undefined.
+alert(User.prototype.city);		// undefined.
+alert(User.prototype.sayHi);
+
+Inheritance:
+============
+Inheritance is achived using the "extends" keyword.
+
+class Animal {
+	constructor(nm) {
+		this.name = nm;
+		this.speed = 0;
+	}
+	
+	run(speed) {
+		this.speed = speed;
+		alert(`${this.name} runs at a speed of ${this.speed}`);
+	}
+	
+	stop() {
+		this.speed = 0;
+		alert(`${this.name} stopped running.`);
+	}
+}
+
+let dog = new Animal("Max");
+dog.run(10);
+dog.stop();
+
+class Rabbit extends Animal {
+	hide() {
+		alert(`${this.name} is now hidden!`);
+	}
+}
+
+let rabbit = new Rabbit('White Rabbit');
+rabbit.run(5);
+rabbit.hide();
+rabbit.stop();
+
+dog.hide();		// Error.
+
+Override behavior of the base class:
+------------------------------------
+class Animal {
+	constructor(nm) {
+		this.name = nm;
+		this.speed = 0;
+	}
+	
+	run(speed) {
+		this.speed = speed;
+		alert(`${this.name} runs at a speed of ${this.speed}`);
+	}
+	
+	stop() {
+		this.speed = 0;
+		alert(`${this.name} stopped running.`);
+	}
+}
+
+let dog = new Animal("Max");
+dog.run(10);
+dog.stop();
+
+class Rabbit extends Animal {
+	hide() {
+		alert(`${this.name} is now hidden!`);
+	}
+	
+	stop() {
+		this.speed = this.speed - 1;
+		alert(`${this.name} is slowing down.`);
+	}
+}
+
+let rabbit = new Rabbit('White Rabbit');
+rabbit.run(5);
+rabbit.hide();
+rabbit.stop();
+
+Override the ctor:
+------------------
+// Override the ctor:
+class Animal {
+	constructor(nm) {
+		this.name = nm;
+		this.speed = 0;
+	}
+	
+	run(speed) {
+		this.speed = speed;
+		alert(`${this.name} runs at a speed of ${this.speed}`);
+	}
+	
+	stop() {
+		this.speed = 0;
+		alert(`${this.name} stopped running.`);
+	}
+}
+
+let dog = new Animal("Max");
+dog.run(10);
+dog.stop();
+
+class Rabbit extends Animal {
+	// override the ctor.
+	constructor(nm, earLength) {
+		super(nm);	// mandatory to call ctor of the base class.
+		// These 2 are not required as they are done in the ctor of the base class.
+		// this.speed = 0;
+		// this.name = nm;
+		this.earLength = earLength;
+	}
+	
+	hide() {
+		alert(`${this.name} is now hidden! It's ear is ${this.earLength} inches long.`);
+	}
+	
+	stop() {
+		this.speed = this.speed - 1;
+		alert(`${this.name} is slowing down.`);
+	}
+	
+}
+
+let rabbit = new Rabbit('White Rabbit', 7);		// Error.
+rabbit.run(5);
+rabbit.hide();
+rabbit.stop();
