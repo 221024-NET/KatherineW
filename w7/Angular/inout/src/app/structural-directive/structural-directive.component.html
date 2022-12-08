@@ -1,0 +1,82 @@
+<p>structural-directive works!</p>
+
+<div *ngIf="true">Display this Element</div>
+<br/>
+
+<h2>ngIfElse Demo</h2>
+
+<div *ngIf="isLogin; else isLogOut">
+    You are logged in.
+</div>
+
+<ng-template #isLogOut>
+    You are logged out;
+</ng-template>
+<br/>
+
+<h2>ngForDemo</h2>
+<ul>
+    <li *ngFor="let data of list">
+        {{data}}
+    </li>
+</ul>
+<br/>
+
+<div>
+    <h2>Using ngFor with Index</h2>
+    <ul>
+        <li *ngFor="let data of list; let i = index">
+            {{i}} : {{data}}
+        </li>
+    </ul>
+</div>
+<br/>
+
+<div class="container">
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+              <th>Index</th>
+              <th>Actor Name</th>
+              <th>Character Name</th>
+              <th>Gender</th>
+              <th>Status</th>
+            </tr>
+        </thead>
+    </table>
+    <tbody>
+        <tr *ngFor="let character of characters;
+                    let i = index;
+                    let first = first;
+                    let last = last"
+                    [ngClass]="{first: first, last: last}">
+            <td>{{i}}</td>
+            <td>{{character.actor_name}}</td>
+            <td>{{ character.character_name }}</td>
+            <td>{{ character.gender }}</td>
+            <td>{{ character.status }}</td>
+        </tr>
+    </tbody>
+</div>
+<br/>
+
+<div>
+    <h2>ngSwitch Demo</h2>
+    <ul [ngSwitch]="status">
+        <li *ngSwitchCase="'New'">
+            <p>Document created.</p>
+        </li>
+        <li *ngSwitchCase="'In Progress'">
+            <p>Document being reviewed.</p>
+        </li>
+        <li *ngSwitchCase="'Approved'">
+            <p>Document has been approved.</p>
+        </li>
+        <li *ngSwitchCase="'Rejected'">
+            <p>Document had been rejected.</p>
+        </li>
+        <li *ngSwitchDefault>
+            <p>Unknown status.</p>
+        </li>
+    </ul>
+</div>

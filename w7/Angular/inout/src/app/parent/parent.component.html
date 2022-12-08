@@ -1,0 +1,8 @@
+<h3>Parent Component</h3>
+
+
+<input type="text" [(ngModel)]="childTitle"/>
+<h3>Click Count : {{clickCount}}</h3>
+
+
+<app-child [title]="childTitle" (onChanged)="onCountChanged($event)"></app-child>

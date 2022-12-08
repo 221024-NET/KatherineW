@@ -1,0 +1,48 @@
+<html>
+    <body>
+        <div id="elem1">Local Storage Demo</div>
+
+
+        <input id="btnDemo" type="button" value="Save" onclick="save()">
+        <input id="btnDemo2" type="button" value="Get" onclick="get()">
+        <input id="btnDemo3" type="button" value="Show All" onclick="showAll()">
+        <input id="btnDemo4" type="button" value="Clear" onclick="remove()">
+
+        <script>
+
+            function save() {
+                localStorage.setItem("name", "John Smith");
+                localStorage.city = "Boston";
+
+                localStorage.user = JSON.stringify({id: "101", name: "Mary", city: "Dallas"}); // Serialization
+
+                console.log("Saved")
+            }
+
+            function get() {
+                console.log(localStorage.getItem("name"));
+                console.log(localStorage.city);
+                console.log(localStorage.user);
+
+                let user = JSON.parse(localStorage.user);
+                console.log(user.name);
+            }
+
+            function remove() {
+                localStorage.removeItem("name");
+                delete localStorage.city;
+                console.log("Cleared");
+            }
+
+            function showAll() {
+                let keys = Object.keys(localStorage);
+
+                for (let key of keys) {
+                    console.log(`${key}: ${localStorage.getItem(key)}`);
+                }
+            }
+
+        </script>
+
+    </body>
+</html>

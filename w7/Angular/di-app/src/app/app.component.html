@@ -1,0 +1,17 @@
+<p [appHighlight]="'pink'">Highlighted Text</p>
+<br/>
+
+<h1>Log Example</h1>
+<form (submit)="logMessage($event, userInput.value)">
+  <input #userInput placeholder="Type a message...">
+  <button type="submit">SUBMIT</button>
+</form>
+<br/>
+
+<h3>Show Logged Messsages</h3>
+<button type="button" (click)="showLog()">SHOW</button>
+<br/>
+
+<h3>Delete Logged Messsages</h3>
+<button type="button" (click)="clearLog()">CLEAR</button>
+<br/>

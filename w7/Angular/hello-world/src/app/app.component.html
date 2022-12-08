@@ -1,0 +1,27 @@
+<div>
+  <span>{{title}} app is running</span>
+  <p>Welcome {{firstname}} {{lastname}} to Angular</p>
+</div>
+<div>
+  <button (click) = "demo();">Demo Button</button>
+  <p>{{demoText}}</p>
+  <input type="text" [(ngModel)]="demoText"/>
+  <br/>
+  <p>What is your favorite way to listen to music?</p>
+  <form (click) = "RadioForm();">
+    <input type="radio" [(ngModel)]="radioChoice" id="vinyl" value="vinyl" name="radioChoice"/>
+    <label for="vinyl">Vinyl</label>
+    <input type="radio" [(ngModel)]="radioChoice" id="cassette" value="cassette" name="radioChoice"/>
+    <label for="cassette">Cassette</label>
+    <input type="radio" [(ngModel)]="radioChoice" id="cd" value="cd" name="radioChoice"/>
+    <label for="cd">CD</label>
+    <input type="radio" [(ngModel)]="radioChoice" id="mp3" value="mp3" name="radioChoice"/>
+    <label for="mp3">MP3</label>
+    <input type="radio" [(ngModel)]="radioChoice" id="streaming" value="streaming" name="radioChoice"/>
+    <label for="streaming">Streaming</label>
+  </form>
+  <p>{{radioResponse}}</p>
+</div>
+
+<app-person></app-person>
+<router-outlet></router-outlet>
