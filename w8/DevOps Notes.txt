@@ -1,0 +1,502 @@
+12-Dec-2022:
+============
+Virtual Machines (VMs):
+	- are machines running on other machines.
+	- are very portable. All information and data is stored in a single file that can be copied to other machines easily.
+	- create as many VMs as you like, but you can only run as many VMs on a single machine as much of RAM is available on the physical machine, which is the "host" machine.
+	- Every VM has it's own "guest O/S" and set of libraries / frameworks as required.
+	- They do not use the O/S or other lib of the host machine.
+	
+The host machine requires a "hypervisor" to host and run VMs.
+	- Oracle Virtual Box.
+	- Hyper-V.
+	- VMWare.
+You have to enable Virtualization in the BIOS.
+
+Cloud Computing:
+----------------
+	- Use data (resources) that are available on another machine and not yours.
+	- Some cloud service providers (CSP):
+		- AWS (Amazon Web Services).
+		- Microsoft Azure.
+		- GCP (Google Cloud Platform).
+
+VMs provisioned will be accessed over the internet...which is represented as a "cloud".
+- It can be accessed from anywhere as long as you have good internet connection. From office, from work, from someone else's machine (as long as you remember the connection details).
+- Once the VM is provisioned, you get a URL for it, which also converts internally to an IP Address.
+- You will also require your CSP credentials to connect to the VM.
+- The same physical box (on the CSP's Data Center) can host VMs of different users.
+- Resources are SHARED!!!
+- When you delete or stop your VM, you will not be charged for it.
+
+
+On-Premise Servers:
+-------------------
+Scale up (Vertical Scaling): Adding more resources to an existing server.
+	- increase the RAM.
+	- add more cores.
+	- add more disk space etc.
+
+Servers share the load: Load Balancing.
+Scale Out (Horizontal Scaling): Add more servers to share the load.
+
+Provisioning new servers in companies is time-consuming:
+	- You need approvals.
+	- You will invite quotes from different vendors.
+	- You will decide on one of the vendors.
+	- After order is placed, the server will arrive in 2-5 days.
+	- After the server has arrived, installing and configuring will take another 2-3 days.
+	- After configuration, 2-3 days of testing (to ensure it is working properly).
+	- And then put in on the network for usage.
+
+Servers mostly are under-utilized.
+You end up spending more upfront (Capital Expenditure - CapEx).
+Servers need:
+	- a room
+	- electricity (light, AC, power etc.)
+	- engineer (to maintain, monitor etc.) (salary).
+	- licenses (if any) of required O/S and other tools.
+	
+All of this adds to the cost (CapEx).
+
+With Cloud:
+	- you only pay for what you use.
+	- as long as the VM is running, you get charged.
+		- it's in cents per hour.
+	- if the VM is not running, you don't pay anything.
+	- You get billed monthly (Operating Expenditure - OpEx).
+	- You also get charged for the storage (the VM is a file that is stored somewhere).
+		- very cheap.
+
+Principles of Cloud Computing:
+------------------------------
+Accessible anywhere, anytime.
+Shared Resources.
+Pay for what you use.
+Security.
+
+
+Load Balancing can be done on cloud as well.
+CSPs guarantee 99.99% up time SLA (Service Level Agreement).
+	- This % keeps going up the more VMs you add for load-balancing
+	- 99.999994%, 99.999995%
+	
+Types of clouds:
+- Public
+- Private
+- Hybrid
+	- mix of public and private.
+	
+Cloud Services:
+- On-Premise: Everything is to managed by you.
+- IaaS: Infrastructure as a Service.
+	- CSP provides the resource, you manage it.
+	- The virtualization, the phyiscal servers, the storage servers, networking infra etc. is managed by the CSP.
+	- You manage any application you run, any middleware, any data you store, any O/S you install.
+	- Compute, EC2 (Elastic Compute Cloud)
+		- Resources (VMs, RAM, Disk space, networking etc.)
+	- Storage:
+		- Cloud storage (AWS S3 - Simple Storage Service).
+		- Database (SQL Server, Oracle, MongoDB, MySQL, PostgreSQL,...)
+- PaaS: Platform as a Service.
+	- Provides a platform for software development.
+	- The O/S, Middleware, the virtualization, the phyiscal servers, the storage servers, networking infra etc. is managed by the CSP.
+	- You manage the application and the data.
+	- Windows Azure itself is a PaaS, AWS Elastic Beanstalk, SalesForce for Developers (force.com), Google App Engine.
+- SaaS: Software as a Service.
+	- Everything is managed by the CSP.
+	- Gmail, O365, Dropbox, Netflix, Amazon Prime.
+
+- IDaaS: Identity as a Service.
+	- AWS, Azure, GCP
+	- AWS IAM (Identity and Access Management).
+- DBaaS: DataBase as a Service
+- IoT: Internet of Things.
+- Media as a Service
+
+Docker and Containers:
+======================
+Docker is a platform for developers / system adminstrators to develop, deploy and run applications with "containers".
+
+Containers are like VMs, but not actual VMs.
+
+Docker uses images to run as containers.
+First, you need an image based on which, you can create and configure your own custom images.
+Once your custom image is ready, you run them with Docker.
+Docker will take that image and run it as a "container".
+Due to the reduced size of these containers, we can run multiple containers on our workstations.
+
+Once a custom image for your application development is ready, store it in a repository and share with other team members.
+They will just pull this image and directly run it as a container.
+These images can also be used for deployment to different environments like TEST, STAGING and PROD.
+
+You can create exact environments like your PROD and let users/developers build, deploy and run their apps on these containers.
+This avoids issues like "was running locally, but not running on server".
+
+Images:
+Tons of images available on "container repositories".
+Docker is the tool used for containerization.
+You can create your own images and publish it to the repositories.
+Docker has it's own repo, hub.docker.com
+
+Install Docker Desktop.
+Docker is used entirely from the CLI.
+
+Docker commands:
+docker --version
+docker version
+docker info
+
+# run a sample docker image:
+docker run hello-world
+
+# List images:
+docker image ls				ls stands for list.
+docker image ls	-a			ls stands for list. -a = ALL.
+
+# List containers:
+docker container ls			Will only show running containers (not the stopped ones).
+docker container ls -a		Show all containers, even the stopped ones. -a = ALL
+docker container ls --all	Show all containers, even the stopped ones. -a = ALL
+docker container ls -aq		Show the container list in "quite" mode. Shows only the container ids. q = quite mode.
+
+# Delete container:
+docker container rm <container_id>		rm = remove.
+
+# Delete image:
+docker image rm <image_id>
+
+Everytime you do a "docker run <image>", it will create a new container.
+
+To delete/remove containers, you have to first stop them. If they are not stopped, they cannot be deleted.
+
+# To delete container:
+docker container stop <container_id>
+docker container rm <container_id>
+
+To stop and delete all containers:
+docker container stop $(docker container ls -aq)
+docker container rm $(docker container ls -aq)
+
+Another image: busybox.
+docker run busybox echo "This is docker!"
+
+# Show docker processes:
+docker ps
+docker ps -a
+
+# To stop containers using the "ps" option:
+docker stop <containerId>
+docker rm <containerId>
+
+You can connect to Containers and run commands on it's shell.
+To connect to a containers in interactive mode:
+docker run -it <image> <cmd>
+
+docker run -it busybox sh
+
+Terminologies to remember:
+1. Images: these are the blueprints of any application that form the basis of containers.
+2. Containers: these are runtime instances of images. Created using docker run <image>.
+3. Docker Daemon: the main docker service running in the background on the host machine that manages building, running and distributing the containers.
+4. Docker client: the CLI tool that users use to interact with the daemon.
+5. Docker Hub: repository of docker images.
+
+# Pull specific docker image:
+docker pull ubuntu:18.04
+docker pull ubuntu:20.04
+
+For e.g.;
+you would take a raw ubuntu image, (using docker file scripting) install java, python etc. and create your own custom image.
+So your custom image is made up of the base ubuntu image plus some libs/bins.
+Here, the ubunut image is called the "Base image" and your custom image "child image".
+
+13-Dec-2022:
+============
+Dockerfile: is a "script" file that has all the commands required to create a new image.
+
+Sample Dockerfile:
+------------------
+# Use an official Python runtime as a parent image
+FROM python:3.8
+
+# Set the working directory to /app
+WORKDIR /usr/src/app
+
+# Copy the current directory contents into the container at /app
+COPY . .
+
+# Install dependencies and any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Make port 5000 available to the world outside this container
+EXPOSE 5000
+
+# Run app.py when the container launches
+CMD ["python", "app.py"]
+------------------
+
+Command to build the image:
+---------------------------
+docker build -t <docker username>/<image name> .
+
+<docker username>: your username as registered on hub.docker.com
+<image nanme>: is any name you want to give to the new image.
+
+docker build -t asingala/catnip .
+
+To run this container:
+docker run -p <local port>:<container port> --name catnip <username>/<image>
+
+docker run -p 8888:5000 --name catnip asingala/catnip
+
+# Check the container:
+docker container ls
+docker ps ls
+
+# Stop and Remove the container:
+docker container stop <containerId or containerName>
+docker stop <containerId or containerName>
+
+docker container rm <containerId or containerName>
+docker rm <containerId or containerName>
+
+Docker Compose:
+---------------
+YAML: Yet Another Markup Language
+The "docker compose" command uses a .yaml or .yml file used to configure, build and run multiple containers together instead of building and running each container separately using "docker build"
+
+docker compose up -d
+	-d : build and run the container in detached mode. Run the container and come back to the terminal.
+
+List processes running with compose:
+docker compose ps
+	
+List containers:
+docker ps
+OR
+docker container ls
+
+Check logs:
+docker compose logs -f <service_name>		# Service name comes from the docker-compose.yml file.
+
+Clean up:
+docker compose down
+
+Execute commands on the container:
+docker exec <containerid> <cmd>
+docker exec -i -t <containerid> <cmd>		# interactive mode
+
+docker exec <containerid> ls
+
+docker exec -i -t <containerid> sh
+# ls
+:
+:
+# pwd
+/app
+
+
+Copy/Push images to Docker hub:
+-------------------------------
+1. Create your image.
+2. Tag the image.
+
+docker tag <imagename> <username>/<repository>:tag
+
+docker tag friendlyhello asingala/get-started:part3
+
+3. Push the tagged image to your repo.
+docker push asingala/get-started:part3
+
+4. Run it directly:
+docker run -p 4000:80 asingala/get-started:part3
+
+Services:
+=========
+Services are used to scale our application and enable load balancing.
+Services are just containers running in production.
+Scaling a service changes the number of container instances running the application.
+Very easy to achieve using the docker-compose.yml file.
+
+To achieve scaling (load-balancing) of containers (services), we need to create a cluster environment.
+Cluster is made up of multiple servers.
+In Docker, the cluster is known as "Swarm".
+First create a swarm, then deploy your service to the swarm.
+
+1. start the swarm:
+docker swarm init
+
+2. Deploy the containers to the swarm:
+Syntax: docker stack deploy -c <compose yaml file> <name of the stack>
+docker stack deploy -c docker-compose.yml getstartedlab
+
+3. Check what services are running:
+docker service ls
+
+Service is not a container. It is made up of containers, a.k.a. tasks.
+
+4. List the tasks (containers) that the services are running:
+docker service ps <service name>
+docker service ps getstartedlab_web
+
+Each task is associated to a container.
+
+5. Inspect a task / conatiner:
+docker inspect <containerid> 
+docker inspect <taskid>
+
+6. To reduce (or increase) the no. of replicas (instance), change the "replicas" value in docker-compose.yml file and redeploy the stack.
+docker stack deploy -c docker-compose.yml getstartedlab
+
+7. Take down the swarm (cluster):
+docker stack rm <stack name>
+docker stack rm getstartedlab
+
+8. Leave the cluster.
+docker swarm leave -f    	(-f: force)
+
+Running multiple containers:
+============================
+Demo:
+- A .NET Core app that connects to MySQL database.
+- 2 containers:
+	1. MySQL DB
+	2. The .NET app
+
+Volumes: Are storage attached to containers.
+- define a volume (and give it a name).
+- associate that volume with a container.
+- Any data stored on the container will be persisted on the volume and be available even after the container has stopped.
+- The next time the container runs, it can read the earlier data as well because the volume does not get erased.
+- You can delete the volume also, if required.
+
+docker volume ls
+docker volume rm <volume name>
+
+14-Dec-2022:
+============
+Multi-stage build:
+------------------
+First, you have to build the code / project. For this you require a lot of libraries, packages etc. from the framework.
+	- So, you have to use a docker image that is substantially larger in size.
+	- A full-fledged SDK (Software Development Kit) is required.
+Then, you take the output of the build and use it on another docker image to be executed as a container, and since execution does not require ALL the libraries, only a subset is required.
+	- So, a much smaller image of the framework is used.
+	- then, run the app from this image/container.
+	
+Now Docker uses the "Builder Pattern".
+Within the same Dockerfile, you can build the code and then copy it onto the image from where the app will run.
+	- This results in the image size being very small.
+	- This reduces the no. of dockerfiles required for each stage as everything is done in a single Dockerfile.
+	
+DevOps:
+=======
+Development + Operations.
+Development is done by developers / engineers / programmers who write the code.
+Operations is the team that does the deployment (and at times maintenance and monitoring) of the app to the server(s).
+Earlier, these were 2 different teams (set of people) who had specific roles & responsiblities.
+Devs were only responsible for coding and unit+integration testing.
+Ops were responsible for all deplyment related tasks, including configuring and maintain/monitor servers.
+
+Usually, the Ops team is very small. And the Ops resources (team members) would be shared across project teams.
+So, for e.g.; Ops team would have 2-3 members and they would manage the deplyment of any number project teams.
+In contrast, Dev teams are usually larger, at least 4-5 members per team, maybe more.
+
+Dev team completes a set of features that are to deployed to a TEST server.
+	- They will send a request to the Ops team to do the deployment (usually an email).
+	- The Ops team would expect a lot of info for the deployment
+		- where is the code (repo).
+		- which branch.
+		- where is the server.
+		- steps required for the deployment.
+		- where are release notes.
+	- The dev team usuall would almost half a day (maybe more) just preparing all this for the Ops team.
+	- The dev team does not have access to the servers, the Ops does.
+Once the Ops team receives the request, they put it in a "queue".
+	-1. They may be busy with deployment of other teams.
+		- So, they may not get to your request immediately. At times, after many hours or even the next day.
+		- Till it is not deployed, the app cannot tested by testing/dev team. Time wasted.
+	-2. The Ops resource(s) are not available at all (not well, on PTO etc.). Things get worse when people leave the company.
+Once the Ops team gets to the deployment request, they will just follow the setup instructions that have been provided.
+	- If there is any error, they will just revert back with the issue and get on to the next deployment.
+	
+The need was to somehow reduce this "dependency" on the Ops team and also automate the entire deployment process.
+That is where the concept of DevOps came into picture.
+
+Development process:
+During development, Devs do not have access to the "main" or "master" branch.
+All developer code is merged into a "development" branch (which is created from the main branch). 
+Each feature / use case is assigned to a developer.
+For every feature / use case to be developed, the assigned developer creates a new branch from the "development" branch.
+Once the Dev completes their work, they push the code to their feature branch. A pull-request is to be created for reivew+merge.
+The designated TL or Sr. Dev will review the code and if all ok, merge it into the devleopment branch.
+Once merged into the development branch, an automated process triggers off which will take the latest code from this branch and deploy it to the "dev" server.
+	Dev server is where the Dev team does thier integration testing.
+Once dev team is fine with the app, it promotes the deployment to the TEST server where testers will do their testing.
+
+Tools used for build+deploy:
+-Jenkins (Free)
+- TeamCity (Free, Enterprise, Cloud)
+- Azure DevOps
+-AWS CodeBuild+CodeDeploy+CodePipeline
+- Github Actions
+
+CI/CD:
+------
+Continuous Integration: build, create package for deployment, run unit tests.
+	- If the build fails, devs have to fix it and deployment will not happen.
+	- If unit tests fail, deployment will not happen.
+Continuous Deployment: the build package is deployed to the server.
+
+Promoting the deployment from one environment to the other is usually done manually.
+
+If the entire process is completely automated, where the deployment to subsequent environments is also done automacially, it is known as Continuous Delivery.
+
+Extreme Programming: requires a lot of expertise and the teams have to be very Agile and Experts at what they do.
+
+Now, with DevOps, the bifurcation b/w Dev and Ops has disappeared.
+	- Devs are expected to know a bit of Ops as well.
+	- You don't actually need a Ops team at all!!!
+	- You don't have to depend on the Ops team to get things done (deployment). 
+	- Ops team does most of the server related activities:
+		- setup, configure, network, security etc.
+		- monitoring.
+	- Ops team are expected to know a bit scripting.
+		- Scripting can also be done for creating, upgrading, managing servers.
+		- Docker, Kubernetes (cluster management platform for containers).
+		
+GitHub Actions:
+===============
+Used to create pipelines / workflows for  CI/CD.
+SonarCloud / SonarQube (FREE)
+	- sonarcloud.io
+	- Used to perform "static analysis" of your code.
+		- Checks for possible bugs, code optimization, vulnerabilities, coding standards, code coverage etc. on your code.
+		- Create Quality Gates
+			- setup rules:
+				- Code Coverage should be > 80%
+				
+Deploy .NET Web API to Azure App Service.
+
+15-Dec-2022:
+============
+Deploy an Angular application to Azure App Service.
+
+Ways to create deployments using GitHub Actions:
+1. When creating an Azure App Service, also specify the deployment details:
+	- the github repo
+	- the branch to deploy from
+	This will create the .github/workflows/<branch>_<appservicename>.yml file that can be modified, if required.
+	This will also create the Azure App Service "secret" in your repo.
+2. You create the deployment from Github.
+	- Actions -> New Workflow -> Select deployment options
+	This will create the .github/workflows/<branch>_<appservicename>.yml file that can be modified, if required.
+	This will also create the Azure App Service "secret" in your repo.
+3. Create the .yml file and all required secrets manually.
+	
+Note:
+- Instead of Azure, the deployment could be on any other cloud.
+- Steps remain the same.
+
+This is just 1-time activity. Not done daily. Changes are done only when either environments change, urls change, an extra step is to be added / removed etc.
