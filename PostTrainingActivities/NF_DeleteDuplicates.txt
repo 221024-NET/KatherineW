@@ -1,0 +1,12 @@
+1NF - Each cell with a single value, each row is unique
+2NF - Remove partial dependency 
+3NF - No transistive functional dependencies (split information that isn't directly related to the key)
+
+Delete duplicates:
+
+with SQL - Select 
+
+with RANK() - 
+
+extension methods
+ef core with stored procedures
