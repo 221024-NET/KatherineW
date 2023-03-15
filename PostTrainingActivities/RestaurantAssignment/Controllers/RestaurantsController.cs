@@ -41,7 +41,7 @@ namespace RestaurantAssignment.Controllers
             return restaurant;
         }
 
-        // GET: api/Restaurants/score/70
+        // GET: api/score/70
         [HttpGet("/score/{score}")]
         public async Task<ActionResult<IEnumerable<Restaurant>>> GetScoredRestaurants(int score)
         {
